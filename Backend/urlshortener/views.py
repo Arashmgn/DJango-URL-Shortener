@@ -10,7 +10,7 @@ import validators
 
 def url_shortner(request):
     if request.method=='POST':
-        expired_ulrs=url.objects.filter(expiration=timezone.now())
+        expired_ulrs=url.objects.filter(expiration__lte=timezone.now())
         expired_ulrs.delete()
         long_url = request.POST.get('long_url')
         if long_url[-1]!='/' :
