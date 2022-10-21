@@ -13,12 +13,13 @@ def url_shortner(request):
         expired_ulrs=url.objects.filter(expiration__lte=timezone.now())
         expired_ulrs.delete()
         long_url = request.POST.get('long_url')
+
         if long_url[-1]!='/' :
             long_url = long_url + '/'
-            print(long_url)
+
         if long_url[0:8] != "https://":
             long_url = "https://"+long_url
-            print(long_url)
+
 
         if long_url and validators.url(long_url):
             long_exists = url.objects.filter(long_url=long_url).first()
